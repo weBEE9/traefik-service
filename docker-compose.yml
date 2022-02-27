@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  traefik:
+    image: traefik:v2.6
+    command: --api.insecure=true --providers.docker
+    networks:
+      - web
+    ports:
+      - 80:80
+      - 9999:8080 # don't use this in production!!
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+networks:
+  web:
+    external: true
